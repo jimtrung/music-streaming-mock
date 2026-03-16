@@ -1,0 +1,209 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "generatedAt": "2026-03-15T10:30:00Z",
+    "datasetName": "development_sample",
+    "description": "Sample dataset demonstrating the improved mock data structure",
+    "totalUsers": 3,
+    "totalArtists": 2,
+    "totalTracks": 4,
+    "totalPlaylists": 2
+  },
+  "users": [
+    {
+      "id": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "username": "john_listener",
+      "email": "john@example.com",
+      "password": "$2a$10$examplehashedpasswordhere",
+      "plainPassword": "TestPass123!",
+      "role": "listener",
+      "provider": "local",
+      "isVerified": true,
+      "isPremium": false,
+      "createdAt": "2026-01-15T10:30:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e",
+      "username": "artist_one",
+      "email": "artist1@example.com",
+      "password": "$2a$10$examplehashedpasswordhere",
+      "plainPassword": "ArtistPass123!",
+      "role": "artist",
+      "provider": "local",
+      "isVerified": true,
+      "isPremium": true,
+      "createdAt": "2026-02-01T08:00:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f",
+      "username": "artist_two",
+      "email": "artist2@example.com",
+      "password": "$2a$10$examplehashedpasswordhere",
+      "plainPassword": "SecondArtist123!",
+      "role": "artist",
+      "provider": "local",
+      "isVerified": false,
+      "isPremium": false,
+      "createdAt": "2026-02-10T14:00:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    }
+  ],
+  "profiles": [
+    {
+      "userId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "John Listener",
+      "avatarUrl": "http://127.0.0.1:9000/musicstream/avatars/a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d/avatar.png",
+      "bio": "Music enthusiast and lifelong listener"
+    },
+    {
+      "userId": "b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e",
+      "name": "Artist One",
+      "avatarUrl": "http://127.0.0.1:9000/musicstream/avatars/b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e/avatar.png",
+      "bio": "Professional musician and composer"
+    },
+    {
+      "userId": "c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f",
+      "name": "Artist Two",
+      "avatarUrl": null,
+      "bio": "Emerging artist and producer"
+    }
+  ],
+  "artists": [
+    {
+      "id": "d4e5f6a7-b8c9-4d5e-8f9a-3b4c5d6e7f8a",
+      "userId": "b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e",
+      "name": "Artist One",
+      "isVerified": true,
+      "createdAt": "2026-02-01T08:15:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "e5f6a7b8-c9da-4e5f-8a9b-4c5d6e7f8a9b",
+      "userId": "c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f",
+      "name": "Artist Two",
+      "isVerified": false,
+      "createdAt": "2026-02-10T14:15:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    }
+  ],
+  "tracks": [
+    {
+      "id": "f6a7b8c9-daeb-4f5a-8b9c-5d6e7f8a9b1c",
+      "artistId": "d4e5f6a7-b8c9-4d5e-8f9a-3b4c5d6e7f8a",
+      "albumId": null,
+      "title": "Beautiful Morning",
+      "audioUrl": "http://127.0.0.1:9000/musicstream/tracks/b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e/audio/f6a7b8c9-daeb-4f5a-8b9c-5d6e7f8a9b1c.mp3",
+      "coverUrl": "http://127.0.0.1:9000/musicstream/covers/b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e/f6a7b8c9-daeb-4f5a-8b9c-5d6e7f8a9b1c.png",
+      "trackNumber": 1,
+      "duration": 245,
+      "genre": "Pop",
+      "createdAt": "2026-02-01T09:00:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "a7b8c9da-ebfc-4a5b-8c9d-6e7f8a9b1c2d",
+      "artistId": "d4e5f6a7-b8c9-4d5e-8f9a-3b4c5d6e7f8a",
+      "albumId": null,
+      "title": "Midnight Dreams",
+      "audioUrl": "http://127.0.0.1:9000/musicstream/tracks/b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e/audio/a7b8c9da-ebfc-4a5b-8c9d-6e7f8a9b1c2d.mp3",
+      "coverUrl": "http://127.0.0.1:9000/musicstream/covers/b2c3d4e5-f6a7-4b5c-8d9e-1f2a3b4c5d6e/a7b8c9da-ebfc-4a5b-8c9d-6e7f8a9b1c2d.png",
+      "trackNumber": 2,
+      "duration": 198,
+      "genre": "Pop",
+      "createdAt": "2026-02-02T10:30:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "b8c9daeb-fcad-4b5c-8d9e-7f8a9b1c2d3e",
+      "artistId": "e5f6a7b8-c9da-4e5f-8a9b-4c5d6e7f8a9b",
+      "albumId": null,
+      "title": "Electric Vibes",
+      "audioUrl": "http://127.0.0.1:9000/musicstream/tracks/c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f/audio/b8c9daeb-fcad-4b5c-8d9e-7f8a9b1c2d3e.mp3",
+      "coverUrl": "http://127.0.0.1:9000/musicstream/covers/c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f/b8c9daeb-fcad-4b5c-8d9e-7f8a9b1c2d3e.png",
+      "trackNumber": 1,
+      "duration": 212,
+      "genre": "Electronic",
+      "createdAt": "2026-02-10T14:30:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "c9daebfc-adbe-4c5d-8e9f-8a9b1c2d3e4f",
+      "artistId": "e5f6a7b8-c9da-4e5f-8a9b-4c5d6e7f8a9b",
+      "albumId": null,
+      "title": "Neon Nights",
+      "audioUrl": "http://127.0.0.1:9000/musicstream/tracks/c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f/audio/c9daebfc-adbe-4c5d-8e9f-8a9b1c2d3e4f.mp3",
+      "coverUrl": "http://127.0.0.1:9000/musicstream/covers/c3d4e5f6-a7b8-4c5d-8e9f-2a3b4c5d6e7f/c9daebfc-adbe-4c5d-8e9f-8a9b1c2d3e4f.png",
+      "trackNumber": 2,
+      "duration": 156,
+      "genre": "Electronic",
+      "createdAt": "2026-02-12T16:00:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    }
+  ],
+  "playlists": [
+    {
+      "id": "daebfcad-beef-4d5e-8f9a-9b1c2d3e4f5a",
+      "ownerId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "My Favorite Tracks",
+      "isPublic": true,
+      "description": "Collection of my favorite songs",
+      "coverUrl": "http://127.0.0.1:9000/musicstream/playlists/a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d/cover.png",
+      "trackIds": [
+        "f6a7b8c9-daeb-4f5a-8b9c-5d6e7f8a9b1c",
+        "b8c9daeb-fcad-4b5c-8d9e-7f8a9b1c2d3e"
+      ],
+      "createdAt": "2026-02-20T11:00:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    },
+    {
+      "id": "ebfcadbe-efc0-4e5f-8a9b-0c2d3e4f5a6b",
+      "ownerId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "name": "Workout Mix",
+      "isPublic": false,
+      "description": "High energy tracks for workouts",
+      "coverUrl": null,
+      "trackIds": [
+        "a7b8c9da-ebfc-4a5b-8c9d-6e7f8a9b1c2d",
+        "c9daebfc-adbe-4c5d-8e9f-8a9b1c2d3e4f"
+      ],
+      "createdAt": "2026-02-25T15:30:00Z",
+      "updatedAt": "2026-03-15T10:30:00Z"
+    }
+  ],
+  "playlistTracks": [
+    {
+      "playlistId": "daebfcad-beef-4d5e-8f9a-9b1c2d3e4f5a",
+      "trackId": "f6a7b8c9-daeb-4f5a-8b9c-5d6e7f8a9b1c",
+      "position": 0,
+      "addedAt": "2026-02-20T11:05:00Z"
+    },
+    {
+      "playlistId": "daebfcad-beef-4d5e-8f9a-9b1c2d3e4f5a",
+      "trackId": "b8c9daeb-fcad-4b5c-8d9e-7f8a9b1c2d3e",
+      "position": 1,
+      "addedAt": "2026-02-20T11:10:00Z"
+    },
+    {
+      "playlistId": "ebfcadbe-efc0-4e5f-8a9b-0c2d3e4f5a6b",
+      "trackId": "a7b8c9da-ebfc-4a5b-8c9d-6e7f8a9b1c2d",
+      "position": 0,
+      "addedAt": "2026-02-25T15:35:00Z"
+    },
+    {
+      "playlistId": "ebfcadbe-efc0-4e5f-8a9b-0c2d3e4f5a6b",
+      "trackId": "c9daebfc-adbe-4c5d-8e9f-8a9b1c2d3e4f",
+      "position": 1,
+      "addedAt": "2026-02-25T15:40:00Z"
+    }
+  ],
+  "refreshTokens": [
+    {
+      "userId": "a1b2c3d4-e5f6-4a5b-8c9d-0e1f2a3b4c5d",
+      "token": "refresh_token_example_1234567890abcdefghij",
+      "expiresAt": "2026-06-15T10:30:00Z",
+      "createdAt": "2026-03-15T10:30:00Z"
+    }
+  ]
+}

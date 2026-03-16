@@ -1,0 +1,82 @@
+[
+  {
+    "id": "a5bf0829-7d92-44d3-97da-eddf83391b11",
+    "userId": "cee5f011-a569-4b66-82c2-6433d4dfa261",
+    "name": " Blue Scholars ",
+    "isVerified": true,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "b1cd5c37-75e4-4e25-8b99-c4ece209210b",
+    "userId": "972f5ce8-8401-4afb-b20c-10d3a57907db",
+    "name": " Dallas Gordon ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "1fd57c30-2421-42ad-9f58-9d00603a6a59",
+    "userId": "017e21f2-15fc-4700-93eb-e9dd2f7798f0",
+    "name": " Rixton ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "5d48f1cc-37e7-487c-ae79-ce0977ba85d4",
+    "userId": "4a138d62-7890-4e5b-8124-f9ceebe9f2b6",
+    "name": " Hoodie Allen ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "df78a7bc-7966-4dd3-9846-36558ac44a9e",
+    "userId": "a2b75c2d-2113-4438-96ec-96b168c6f942",
+    "name": " The Eraserheads ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "8870e56a-3f5f-497d-b32a-7224b845b9e6",
+    "userId": "bbac9d22-0767-4e64-8110-2f772ba61609",
+    "name": " Brett Eldredge ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "d8025cf5-865c-426e-86c2-81b24d12c7f8",
+    "userId": "abfc7579-1c95-48d7-99f6-6251d6f96511",
+    "name": " Jason Michael Carroll ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "3a554bdf-750d-4825-813d-067f4c0e1ad2",
+    "userId": "d085d473-6e5e-4a4e-90dc-0bfe6cc08fb5",
+    "name": " Manuela Van Geenhoven ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "06980eb7-8718-4273-b5fb-294ea1459192",
+    "userId": "9f971d85-0960-413a-b8d9-2535437dad26",
+    "name": " The Flaming Lips ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  },
+  {
+    "id": "30fe5b08-f7d5-4253-86eb-a9bc85637ae5",
+    "userId": "6ee46891-b77b-4cb3-bd86-4afd25b9b42b",
+    "name": " Burt Bacharach ",
+    "isVerified": false,
+    "createdAt": "2026-03-16T03:14:33Z",
+    "updatedAt": "2026-03-16T03:14:33Z"
+  }
+]

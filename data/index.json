@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "lastUpdated": "2026-03-16T10:14:48.7411143+07:00",
+  "datasets": {
+    "50": {
+      "name": "50",
+      "createdAt": "2026-03-16T10:10:25.147552+07:00",
+      "lastUpdated": "2026-03-16T10:10:25.147552+07:00",
+      "path": "data\\50",
+      "userCount": 0,
+      "artistCount": 0,
+      "trackCount": 0,
+      "playlistCount": 0,
+      "profileCount": 0,
+      "status": "in-progress"
+    },
+    "t1": {
+      "name": "t1",
+      "createdAt": "2026-03-15T08:59:40.9930096+07:00",
+      "lastUpdated": "2026-03-15T09:00:15.3590592+07:00",
+      "path": "data\\t1",
+      "userCount": 100,
+      "artistCount": 0,
+      "trackCount": 0,
+      "playlistCount": 0,
+      "profileCount": 0,
+      "status": "in-progress"
+    },
+    "test": {
+      "name": "test",
+      "createdAt": "2026-03-16T10:14:06.8211364+07:00",
+      "lastUpdated": "2026-03-16T10:14:48.7411143+07:00",
+      "path": "data\\test",
+      "userCount": 50,
+      "artistCount": 10,
+      "trackCount": 30,
+      "playlistCount": 5,
+      "profileCount": 50,
+      "status": "in-progress"
+    },
+    "users": {
+      "name": "users",
+      "createdAt": "2026-03-15T08:18:52.7048859+07:00",
+      "lastUpdated": "2026-03-15T08:58:56.6469499+07:00",
+      "path": "data\\users",
+      "userCount": 100,
+      "artistCount": 0,
+      "trackCount": 0,
+      "playlistCount": 0,
+      "profileCount": 100,
+      "status": "complete"
+    },
+    "users;": {
+      "name": "users;",
+      "createdAt": "2026-03-15T08:37:44.5799861+07:00",
+      "lastUpdated": "2026-03-15T08:38:13.2092328+07:00",
+      "path": "data\\users;",
+      "userCount": 50,
+      "artistCount": 0,
+      "trackCount": 0,
+      "playlistCount": 0,
+      "profileCount": 0,
+      "status": "in-progress"
+    }
+  }
+}
