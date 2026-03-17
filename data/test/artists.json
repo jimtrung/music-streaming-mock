@@ -1,82 +1,82 @@
 [
   {
-    "id": "a5bf0829-7d92-44d3-97da-eddf83391b11",
-    "userId": "cee5f011-a569-4b66-82c2-6433d4dfa261",
-    "name": " Blue Scholars ",
+    "id": "afe84f60-15c3-4734-a474-20925428284a",
+    "userId": "7d7815f9-cda0-4e6a-abe3-816f3409d23e",
+    "name": " Ed Sheeran ",
     "isVerified": true,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "b1cd5c37-75e4-4e25-8b99-c4ece209210b",
-    "userId": "972f5ce8-8401-4afb-b20c-10d3a57907db",
-    "name": " Dallas Gordon ",
+    "id": "df53b1f7-adce-4435-b781-0f3c37bd501e",
+    "userId": "e52c6119-76e3-4028-a780-6595c63d3005",
+    "name": " Cameron The Public ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "1fd57c30-2421-42ad-9f58-9d00603a6a59",
-    "userId": "017e21f2-15fc-4700-93eb-e9dd2f7798f0",
-    "name": " Rixton ",
+    "id": "bc59e8b6-684c-4d35-9a05-fa5bb35033fb",
+    "userId": "ced1d4af-3a01-4adc-adc6-83329712e61d",
+    "name": " Cherish ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "5d48f1cc-37e7-487c-ae79-ce0977ba85d4",
-    "userId": "4a138d62-7890-4e5b-8124-f9ceebe9f2b6",
-    "name": " Hoodie Allen ",
+    "id": "c1e6545e-e513-4e5d-b6aa-4430f4f2b9ce",
+    "userId": "32573e11-049c-40e9-858c-5d0d504d3b68",
+    "name": " Marty Stuart ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "df78a7bc-7966-4dd3-9846-36558ac44a9e",
-    "userId": "a2b75c2d-2113-4438-96ec-96b168c6f942",
-    "name": " The Eraserheads ",
+    "id": "5459277f-ffc5-4186-9a42-8996334ce3b0",
+    "userId": "6b2ccff4-9485-40b7-a468-2d995357a865",
+    "name": " Beyoncé ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "8870e56a-3f5f-497d-b32a-7224b845b9e6",
-    "userId": "bbac9d22-0767-4e64-8110-2f772ba61609",
-    "name": " Brett Eldredge ",
+    "id": "9a95eb71-c368-481f-ad13-61bb47d139cf",
+    "userId": "ad390e1f-6a60-4c89-9bc1-ba68dac0184a",
+    "name": " AminIzrael. ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "d8025cf5-865c-426e-86c2-81b24d12c7f8",
-    "userId": "abfc7579-1c95-48d7-99f6-6251d6f96511",
-    "name": " Jason Michael Carroll ",
+    "id": "5d0a1a90-59a6-4733-ba1b-127a2f9f1579",
+    "userId": "f641d8f8-2e2c-4bd0-be72-bf8db5532962",
+    "name": " Suicidal Tendencies ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "3a554bdf-750d-4825-813d-067f4c0e1ad2",
-    "userId": "d085d473-6e5e-4a4e-90dc-0bfe6cc08fb5",
-    "name": " Manuela Van Geenhoven ",
+    "id": "cebd1b6e-c32a-4b57-9bd3-46a4885b3200",
+    "userId": "04bdb0eb-276f-448e-ba1a-424e2305c89f",
+    "name": " Demi Lovato ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "06980eb7-8718-4273-b5fb-294ea1459192",
-    "userId": "9f971d85-0960-413a-b8d9-2535437dad26",
-    "name": " The Flaming Lips ",
+    "id": "da1be550-d4ca-4138-9faf-53cbc3ee7288",
+    "userId": "2e40edd8-f646-40af-92d1-2fbe58363d30",
+    "name": " Erykah Badu ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   },
   {
-    "id": "30fe5b08-f7d5-4253-86eb-a9bc85637ae5",
-    "userId": "6ee46891-b77b-4cb3-bd86-4afd25b9b42b",
-    "name": " Burt Bacharach ",
+    "id": "4d177b4d-8b08-4988-8440-78517c704579",
+    "userId": "3fa73811-61ca-4b15-97c9-65265862a2d0",
+    "name": " Martin Kimble ",
     "isVerified": false,
-    "createdAt": "2026-03-16T03:14:33Z",
-    "updatedAt": "2026-03-16T03:14:33Z"
+    "createdAt": "2026-03-16T03:43:26Z",
+    "updatedAt": "2026-03-16T03:43:26Z"
   }
 ]

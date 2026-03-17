@@ -1,75 +1,45 @@
 [
   {
-    "id": "60b38be2-97b3-4b36-8fc4-3a6666829268",
-    "ownerId": "cee5f011-a569-4b66-82c2-6433d4dfa261",
+    "id": "9542f2ff-1682-4222-8272-7192c7c1dfd7",
+    "ownerId": "7d7815f9-cda0-4e6a-abe3-816f3409d23e",
     "name": "Loops Not Distractions",
     "isPublic": true,
     "description": "A great playlist with 1 tracks",
-    "coverUrl": "https://storage.example.com/covers/82178d6a-97da-4518-ba73-0664a9da3253.jpg",
+    "coverUrl": "https://storage.example.com/covers/28b20b7c-f1e7-4399-8800-8634f8fcec0b.jpg",
     "trackIds": [
-      "8c2c5105-574f-4731-a3ec-a7e31b20367f"
+      "2ffd88a6-434e-448f-8f3e-0deefbf39988"
     ],
-    "createdAt": "2026-03-16T03:14:48Z",
-    "updatedAt": "2026-03-16T03:14:48Z"
+    "createdAt": "2026-03-16T03:43:33Z",
+    "updatedAt": "2026-03-16T03:43:33Z"
   },
   {
-    "id": "4d4dfdd1-714c-48db-9cea-a0a2887c27a0",
-    "ownerId": "972f5ce8-8401-4afb-b20c-10d3a57907db",
-    "name": "Rain on Repeat",
+    "id": "eaa7a52e-9a57-402e-9d67-69caea35b917",
+    "ownerId": "e52c6119-76e3-4028-a780-6595c63d3005",
+    "name": "Midnight Lo-Fi Ashtray",
     "isPublic": false,
     "description": "A great playlist with 3 tracks",
-    "coverUrl": "https://storage.example.com/covers/deec4631-655f-423c-a9f0-11385799fac3.jpg",
+    "coverUrl": "https://storage.example.com/covers/95953172-8a2e-4b4d-be2f-762bd1c10b5f.jpg",
     "trackIds": [
-      "8c2c5105-574f-4731-a3ec-a7e31b20367f",
-      "071ebb1e-ba61-4e62-9ea1-ad235f0873d8",
-      "7ba771fd-0a12-4116-b8e4-132d75ca2ad1"
+      "2ffd88a6-434e-448f-8f3e-0deefbf39988",
+      "e241d151-cc1e-401e-946b-238e421ced44",
+      "5f3de62e-a151-4195-bbf4-117acbd50b5d"
     ],
-    "createdAt": "2026-03-16T03:14:48Z",
-    "updatedAt": "2026-03-16T03:14:48Z"
+    "createdAt": "2026-03-16T03:43:33Z",
+    "updatedAt": "2026-03-16T03:43:33Z"
   },
   {
-    "id": "70e51c78-5e7e-4586-a2d8-2a4a6b76398a",
-    "ownerId": "017e21f2-15fc-4700-93eb-e9dd2f7798f0",
-    "name": "Neon Balcony Thoughts",
+    "id": "824e18a4-3e0b-4d1f-82f0-abed112f5bc1",
+    "ownerId": "ced1d4af-3a01-4adc-adc6-83329712e61d",
+    "name": "Deep Focus, Shallow Coffee",
     "isPublic": true,
     "description": "A great playlist with 3 tracks",
-    "coverUrl": "https://storage.example.com/covers/e6f4568e-6916-4316-a1ab-b0afeb89035a.jpg",
+    "coverUrl": "https://storage.example.com/covers/fa67b39a-3797-4e9f-bb37-3e52105d39d5.jpg",
     "trackIds": [
-      "8c2c5105-574f-4731-a3ec-a7e31b20367f",
-      "7ba771fd-0a12-4116-b8e4-132d75ca2ad1",
-      "75d01f1e-1bae-4d23-84f8-a530c2f999d2"
+      "2ffd88a6-434e-448f-8f3e-0deefbf39988",
+      "5f3de62e-a151-4195-bbf4-117acbd50b5d",
+      "566dae7d-fd58-492c-98b2-aebbc3df04a5"
     ],
-    "createdAt": "2026-03-16T03:14:48Z",
-    "updatedAt": "2026-03-16T03:14:48Z"
-  },
-  {
-    "id": "82f4d8bb-fac2-4295-b4c1-d0c022625768",
-    "ownerId": "4a138d62-7890-4e5b-8124-f9ceebe9f2b6",
-    "name": "Songs for Unsent Messages",
-    "isPublic": false,
-    "description": "A great playlist with 3 tracks",
-    "coverUrl": "https://storage.example.com/covers/a336a55c-2b22-45e0-89e8-07283b017d04.jpg",
-    "trackIds": [
-      "8c2c5105-574f-4731-a3ec-a7e31b20367f",
-      "d14dc9d3-2d58-4450-9e63-9ab95ada57de",
-      "60f8a687-c99f-46de-8a55-eaf83f088da0"
-    ],
-    "createdAt": "2026-03-16T03:14:48Z",
-    "updatedAt": "2026-03-16T03:14:48Z"
-  },
-  {
-    "id": "c71245e5-046f-4360-aedf-48588c9e4181",
-    "ownerId": "a2b75c2d-2113-4438-96ec-96b168c6f942",
-    "name": "Compile \u0026 Chill",
-    "isPublic": true,
-    "description": "A great playlist with 3 tracks",
-    "coverUrl": "https://storage.example.com/covers/fcb2bed5-c719-4678-ad34-910ed25cdf98.jpg",
-    "trackIds": [
-      "8c2c5105-574f-4731-a3ec-a7e31b20367f",
-      "75d01f1e-1bae-4d23-84f8-a530c2f999d2",
-      "50a12e85-04c8-4567-8b39-c578f3abf8c7"
-    ],
-    "createdAt": "2026-03-16T03:14:48Z",
-    "updatedAt": "2026-03-16T03:14:48Z"
+    "createdAt": "2026-03-16T03:43:33Z",
+    "updatedAt": "2026-03-16T03:43:33Z"
   }
 ]

@@ -3,6 +3,8 @@ package generators
 import (
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/google/uuid"
@@ -183,6 +185,20 @@ func (tg *TrackGenerator) Generate(quantity int) error {
 		return fmt.Errorf("no artists found - generate artists first")
 	}
 
+	// Load actual audio and cover files
+	songDir := "./assets/songs"
+	coverDir := "./assets/covers"
+
+	songFiles := tg.listFiles(songDir, ".mp3")
+	if len(songFiles) == 0 {
+		return fmt.Errorf("no MP3 files found in %s", songDir)
+	}
+
+	coverFiles := tg.listImageFiles(coverDir)
+	if len(coverFiles) == 0 {
+		return fmt.Errorf("no image files found in %s", coverDir)
+	}
+
 	tracks := make([]model.TrackJSON, quantity)
 
 	genres := []string{"Pop", "Rock", "Hip-Hop", "Jazz", "Classical", "Electronic", "Country", "Reggae"}
@@ -195,12 +211,16 @@ func (tg *TrackGenerator) Generate(quantity int) error {
 		title := tg.ctx.GetRandomTrackTitle()
 		genre := genres[i%len(genres)]
 
+		// Select random audio and cover files
+		audioFile := songFiles[i%len(songFiles)]
+		coverFile := coverFiles[i%len(coverFiles)]
+
 		track := model.TrackJSON{
 			Id:        uuid.New().String(),
 			ArtistId:  artist.Id,
 			Title:     title,
-			AudioUrl:  fmt.Sprintf("https://storage.example.com/tracks/%s.mp3", uuid.New().String()),
-			CoverUrl:  fmt.Sprintf("https://storage.example.com/covers/%s.jpg", uuid.New().String()),
+			AudioUrl:  audioFile,
+			CoverUrl:  coverFile,
 			TrackNum:  (i % 20) + 1,
 			Duration:  180 + (i * 5 % 120), // 3-5 minutes
 			Genre:     genre,
@@ -222,6 +242,42 @@ func (tg *TrackGenerator) Generate(quantity int) error {
 
 	fmt.Printf("✓ Successfully generated and saved %d tracks\n", quantity)
 	return nil
+}
+
+// listFiles returns all files with a specific extension from a directory
+func (tg *TrackGenerator) listFiles(dir string, ext string) []string {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		log.Printf("Warning: Could not read directory %s: %v\n", dir, err)
+		return []string{}
+	}
+
+	var files []string
+	for _, entry := range entries {
+		if !entry.IsDir() && filepath.Ext(entry.Name()) == ext {
+			files = append(files, filepath.Join(dir, entry.Name()))
+		}
+	}
+	return files
+}
+
+// listImageFiles returns all image files from a directory
+func (tg *TrackGenerator) listImageFiles(dir string) []string {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		log.Printf("Warning: Could not read directory %s: %v\n", dir, err)
+		return []string{}
+	}
+
+	var files []string
+	validExts := map[string]bool{".jpg": true, ".jpeg": true, ".png": true, ".gif": true}
+
+	for _, entry := range entries {
+		if !entry.IsDir() && validExts[filepath.Ext(entry.Name())] {
+			files = append(files, filepath.Join(dir, entry.Name()))
+		}
+	}
+	return files
 }
 
 // PlaylistGenerator generates mock playlists
