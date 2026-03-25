@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	apiBase = "http://localhost:8080"
+	apiBase = "http://localhost:5255"
 )
 
 // SignIn authenticates a user and returns an access token
@@ -264,7 +264,7 @@ func SendTrackRequest(track model.TrackJSON, accessToken string) uuid.UUID {
 		// Add form fields
 		mw.WriteField("title", track.Title)
 		if track.TrackNum > 0 {
-			mw.WriteField("trackNumber", fmt.Sprintf("%d", track.TrackNum))
+			mw.WriteField("track_number", fmt.Sprintf("%d", track.TrackNum))
 		}
 
 		// Add audio file (required)
@@ -329,29 +329,43 @@ func SendTrackRequest(track model.TrackJSON, accessToken string) uuid.UUID {
 		return uuid.UUID{}
 	}
 
-	fmt.Printf("  ✓ Bài hát được tạo: %s\n", track.Title)
-	return uuid.UUID{}
+	// Parse the response to get the created track ID
+	var response map[string]interface{}
+	if err := json.Unmarshal(body, &response); err != nil {
+		fmt.Printf("  × Không thể phân tích phản hồi bài hát: %v\n", err)
+		return uuid.UUID{}
+	}
+
+	trackId := uuid.UUID{}
+	if idStr, ok := response["id"].(string); ok {
+		if parsedId, err := uuid.Parse(idStr); err == nil {
+			trackId = parsedId
+		}
+	}
+
+	fmt.Printf("  ✓ Bài hát được tạo: %s (ID: %s)\n", track.Title, trackId.String())
+	return trackId
 }
 
 // SendPlaylistRequest sends a playlist creation request to the API
-func SendPlaylistRequest(playlist model.PlaylistJSON, accessToken string) uuid.UUID {
+func SendPlaylistRequest(playlist model.PlaylistJSON, accessToken string) string {
 	url := apiBase + "/playlist"
 
 	payload := map[string]interface{}{
-		"name":     playlist.Name,
-		"isPublic": playlist.IsPublic,
+		"name":      playlist.Name,
+		"is_public": playlist.IsPublic,
 	}
 
 	jsonBody, err := json.Marshal(payload)
 	if err != nil {
 		fmt.Printf("  × Không thể mã hóa dữ liệu danh sách phát: %v\n", err)
-		return uuid.UUID{}
+		return ""
 	}
 
 	req, err := http.NewRequest(http.MethodPost, url, bytes.NewBuffer(jsonBody))
 	if err != nil {
 		fmt.Printf("  × Không thể tạo yêu cầu danh sách phát: %v\n", err)
-		return uuid.UUID{}
+		return ""
 	}
 
 	req.Header.Set("Content-Type", "application/json")
@@ -363,18 +377,31 @@ func SendPlaylistRequest(playlist model.PlaylistJSON, accessToken string) uuid.U
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Printf("  × Không thể gửi yêu cầu danh sách phát: %v\n", err)
-		return uuid.UUID{}
+		return ""
 	}
 	defer resp.Body.Close()
 
+	body, _ := io.ReadAll(resp.Body)
+
 	if resp.StatusCode >= 400 {
-		body, _ := io.ReadAll(resp.Body)
 		fmt.Printf("  × Lỗi: %s\n", string(body))
-		return uuid.UUID{}
+		return ""
 	}
 
-	fmt.Printf("  ✓ Danh sách phát được tạo: %s\n", playlist.Name)
-	return uuid.UUID{}
+	// Parse the response to get the created playlist ID
+	var response map[string]interface{}
+	if err := json.Unmarshal(body, &response); err != nil {
+		fmt.Printf("  × Không thể phân tích phản hồi danh sách phát: %v\n", err)
+		return ""
+	}
+
+	playlistId := ""
+	if id, ok := response["id"].(string); ok {
+		playlistId = id
+	}
+
+	fmt.Printf("  ✓ Danh sách phát được tạo: %s (ID: %s)\n", playlist.Name, playlistId)
+	return playlistId
 }
 
 // SendAddTrackToPlaylistRequest sends a request to add a track to a playlist
@@ -382,9 +409,9 @@ func SendAddTrackToPlaylistRequest(playlistId, trackId string, position int, acc
 	url := apiBase + "/playlist/add"
 
 	payload := map[string]interface{}{
-		"playlistId": playlistId,
-		"trackId":    trackId,
-		"position":   position,
+		"playlist_id": playlistId,
+		"track_id":    trackId,
+		"position":    position,
 	}
 
 	jsonBody, err := json.Marshal(payload)

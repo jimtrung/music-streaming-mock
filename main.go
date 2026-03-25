@@ -70,18 +70,20 @@ func main() {
 		case 6:
 			handleMockPlaylist()
 		case 7:
-			handleExportJSON()
+			handleAddTrackToPlaylist()
 		case 8:
-			handleListDatasets()
+			handleExportJSON()
 		case 9:
-			handleViewDatasetInfo()
+			handleListDatasets()
 		case 10:
-			handleCoreExportSQL()
+			handleViewDatasetInfo()
 		case 11:
-			handleImportJSON()
+			handleCoreExportSQL()
 		case 12:
-			handleGenerateFromAPI()
+			handleImportJSON()
 		case 13:
+			handleGenerateFromAPI()
+		case 14:
 			handleExportToAPI()
 		case 0:
 			fmt.Println("Exiting...")
@@ -92,7 +94,7 @@ func main() {
 }
 
 func printMainMenu() {
-	fmt.Println("\n╔════════════════ TRÌNH SINH DỮ LIỆU GIẢ ═════════════════╗")
+	fmt.Println("\n╔════════════════ TRÌNH SINH DỮ LIỆU GIẢ ══════════════╗")
 	if currentCtx != nil {
 		stats := currentCtx.GetStats()
 		fmt.Printf("║ Tập dữ liệu: %-38s  ║\n", currentCtx.DatasetName)
@@ -100,7 +102,7 @@ func printMainMenu() {
 			stats["users"], stats["artists"], stats["tracks"], stats["playlists"])
 		fmt.Println("╟──────────────────────────────────────────────────────╢")
 	} else {
-		fmt.Println("║ Chưa chọn tập dữ liệu                               ║")
+		fmt.Println("║ Chưa chọn tập dữ liệu                                ║")
 		fmt.Println("╟──────────────────────────────────────────────────────╢")
 	}
 	fmt.Println("║ [SINH DỮ LIỆU]                                       ║")
@@ -110,17 +112,18 @@ func printMainMenu() {
 	fmt.Println("║  4. Sinh nghệ sĩ                                     ║")
 	fmt.Println("║  5. Sinh bài hát                                     ║")
 	fmt.Println("║  6. Sinh danh sách phát                              ║")
+	fmt.Println("║  7. Thêm bài hát vào danh sách phát                  ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║ [KHO LƯU TRỮ & XUẤT]                                 ║")
-	fmt.Println("║  7. Xuất tập dữ liệu dưới dạng JSON                  ║")
-	fmt.Println("║  8. Liệt kê tất cả các tập dữ liệu                  ║")
-	fmt.Println("║  9. Xem thông tin tập dữ liệu                        ║")
-	fmt.Println("║ 10. Xuất truy vấn SQL                                ║")
+	fmt.Println("║  8. Xuất tập dữ liệu dưới dạng JSON                  ║")
+	fmt.Println("║  9. Liệt kê tất cả các tập dữ liệu                   ║")
+	fmt.Println("║ 10. Xem thông tin tập dữ liệu                        ║")
+	fmt.Println("║ 11. Xuất truy vấn SQL                                ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║ [API & HAI CHIỀU]                                    ║")
-	fmt.Println("║ 11. Nhập tập dữ liệu JSON                            ║")
-	fmt.Println("║ 12. Sinh từ API (dữ liệu mới)                        ║")
-	fmt.Println("║ 13. Xuất dữ liệu đã tải lên API                      ║")
+	fmt.Println("║ 12. Nhập tập dữ liệu JSON                            ║")
+	fmt.Println("║ 13. Sinh từ API (dữ liệu mới)                        ║")
+	fmt.Println("║ 14. Xuất dữ liệu đã tải lên API                      ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║  0. Thoát                                            ║")
 	fmt.Println("╚══════════════════════════════════════════════════════╝")
@@ -313,6 +316,131 @@ func handleMockPlaylist() {
 	if err := playlistGen.Generate(quantity, tracksPerPlaylist); err != nil {
 		log.Printf("Error generating playlists: %v\n", err)
 	}
+	pauseForContinue()
+}
+
+func handleAddTrackToPlaylist() {
+	if currentCtx == nil {
+		fmt.Println("✗ Please select a dataset first (option 1)")
+		return
+	}
+
+	if len(currentCtx.Playlists) == 0 {
+		fmt.Println("✗ No playlists found. Generate playlists first (option 6)")
+		pauseForContinue()
+		return
+	}
+
+	if len(currentCtx.Tracks) == 0 {
+		fmt.Println("✗ No tracks found. Generate tracks first (option 5)")
+		pauseForContinue()
+		return
+	}
+
+	// Display available playlists
+	fmt.Println("\n═══════════════════════════════════════════════════════")
+	fmt.Println("Available Playlists:")
+	for i, playlist := range currentCtx.Playlists {
+		fmt.Printf("[%d] %s (%d tracks)\n", i+1, playlist.Name, len(playlist.TrackIds))
+	}
+	fmt.Println("═══════════════════════════════════════════════════════")
+
+	fmt.Print("Select playlist number: ")
+	var playlistIndex int
+	fmt.Scan(&playlistIndex)
+
+	if playlistIndex < 1 || playlistIndex > len(currentCtx.Playlists) {
+		fmt.Println("Invalid playlist selection.")
+		return
+	}
+
+	playlistIdx := playlistIndex - 1
+
+	fmt.Print("Enter the number of tracks to add to this playlist: ")
+	var trackCount int
+	fmt.Scan(&trackCount)
+
+	if trackCount <= 0 {
+		fmt.Println("Invalid track count. Must be greater than 0.")
+		return
+	}
+
+	// Display available tracks
+	fmt.Println("\n═══════════════════════════════════════════════════════")
+	fmt.Println("Available Tracks:")
+	for i, track := range currentCtx.Tracks {
+		// Find artist name
+		artistName := "Unknown"
+		for _, artist := range currentCtx.Artists {
+			if artist.Id == track.ArtistId {
+				artistName = artist.Name
+				break
+			}
+		}
+		fmt.Printf("[%d] %s (%s)\n", i+1, track.Title, artistName)
+	}
+	fmt.Println("═══════════════════════════════════════════════════════")
+
+	var newPlaylistTracks []model.PlaylistTrackJSON
+	addedCount := 0
+
+	for i := 0; i < trackCount; i++ {
+		fmt.Printf("\n[Track %d/%d]\n", i+1, trackCount)
+		fmt.Print("Select track number (or 0 to skip): ")
+		var trackIndex int
+		fmt.Scan(&trackIndex)
+
+		if trackIndex == 0 {
+			continue
+		}
+
+		if trackIndex < 1 || trackIndex > len(currentCtx.Tracks) {
+			fmt.Println("Invalid track selection.")
+			continue
+		}
+
+		track := currentCtx.Tracks[trackIndex-1]
+
+		// Check if track already in playlist
+		alreadyExists := false
+		for _, tid := range currentCtx.Playlists[playlistIdx].TrackIds {
+			if tid == track.Id {
+				fmt.Printf("✗ Track already in playlist: %s\n", track.Title)
+				alreadyExists = true
+				break
+			}
+		}
+
+		if alreadyExists {
+			continue
+		}
+
+		// Add track to playlist
+		currentCtx.Playlists[playlistIdx].TrackIds = append(currentCtx.Playlists[playlistIdx].TrackIds, track.Id)
+		newPlaylistTracks = append(newPlaylistTracks, model.PlaylistTrackJSON{
+			PlaylistId: currentCtx.Playlists[playlistIdx].Id,
+			TrackId:    track.Id,
+			Position:   len(currentCtx.Playlists[playlistIdx].TrackIds),
+			AddedAt:    time.Now().UTC().Format(time.RFC3339),
+		})
+
+		fmt.Printf("✓ Added: %s\n", track.Title)
+		addedCount++
+	}
+
+	if addedCount == 0 {
+		fmt.Println("No tracks were added.")
+		pauseForContinue()
+		return
+	}
+
+	// Add all new playlist-track relationships to context
+	currentCtx.Mutex.Lock()
+	currentCtx.PlaylistTracks = append(currentCtx.PlaylistTracks, newPlaylistTracks...)
+	currentCtx.Mutex.Unlock()
+
+	fmt.Printf("\n✓ Successfully added %d tracks to playlist: %s\n", addedCount, currentCtx.Playlists[playlistIdx].Name)
+	fmt.Println("💡 Remember to export (option 8) to save changes!")
 	pauseForContinue()
 }
 
@@ -660,6 +788,7 @@ func handleExportToAPI() {
 
 	// Send tracks to API
 	fmt.Printf("\n📄 Đang gửi %d bài hát lên API...\n", len(mockData.Tracks))
+	trackIdMap := make(map[string]string) // Map old ID -> new API ID
 	for idx, track := range mockData.Tracks {
 		fmt.Printf("  [%d/%d] Tạo bài hát: %s\n", idx+1, len(mockData.Tracks), track.Title)
 
@@ -669,11 +798,15 @@ func handleExportToAPI() {
 			continue
 		}
 
-		api.SendTrackRequest(track, token)
+		newTrackId := api.SendTrackRequest(track, token)
+		if newTrackId.String() != "00000000-0000-0000-0000-000000000000" {
+			trackIdMap[track.Id] = newTrackId.String()
+		}
 	}
 
 	// Send playlists to API
 	fmt.Printf("\n📄 Đang gửi %d danh sách phát lên API...\n", len(mockData.Playlists))
+	playlistIdMap := make(map[string]string) // Map old ID -> new API ID
 	for idx, playlist := range mockData.Playlists {
 		fmt.Printf("  [%d/%d] Tạo danh sách phát: %s\n", idx+1, len(mockData.Playlists), playlist.Name)
 
@@ -683,8 +816,53 @@ func handleExportToAPI() {
 			continue
 		}
 
-		api.SendPlaylistRequest(playlist, token)
+		newPlaylistId := api.SendPlaylistRequest(playlist, token)
+		if newPlaylistId == "" {
+			fmt.Printf("  ✗ Không thể tạo danh sách phát\n")
+			continue
+		}
+		playlistIdMap[playlist.Id] = newPlaylistId
 	}
+
+	// Send playlist tracks to API
+	fmt.Printf("\n📄 Đang thêm %d bài hát vào danh sách phát...\n", len(mockData.PlaylistTracks))
+	playlistLookup := make(map[string]model.PlaylistJSON)
+	for _, playlist := range mockData.Playlists {
+		playlistLookup[playlist.Id] = playlist
+	}
+
+	for idx, pt := range mockData.PlaylistTracks {
+		playlist, ok := playlistLookup[pt.PlaylistId]
+		if !ok {
+			fmt.Printf("  [%d/%d] ✗ Danh sách phát không tìm thấy\n", idx+1, len(mockData.PlaylistTracks))
+			continue
+		}
+
+		token, ok := userTokens[playlist.OwnerId]
+		if !ok {
+			fmt.Printf("  [%d/%d] ✗ Không có token xác thực cho danh sách phát: %s\n", idx+1, len(mockData.PlaylistTracks), playlist.Name)
+			continue
+		}
+
+		// Use the new playlist ID returned from API, or fall back to old ID if not found
+		apiPlaylistId := pt.PlaylistId
+		if newId, exists := playlistIdMap[pt.PlaylistId]; exists {
+			apiPlaylistId = newId
+		}
+
+		// Use the new track ID returned from API, or fall back to old ID if not found
+		apiTrackId := pt.TrackId
+		if newId, exists := trackIdMap[pt.TrackId]; exists {
+			apiTrackId = newId
+		}
+
+		if err := api.SendAddTrackToPlaylistRequest(apiPlaylistId, apiTrackId, pt.Position, token); err != nil {
+			fmt.Printf("Playlist ID: %s | Track ID: %s", apiPlaylistId, apiTrackId)
+			fmt.Printf("  [%d/%d] ✗ Lỗi: %v\n", idx+1, len(mockData.PlaylistTracks), err)
+			continue
+		}
+	}
+	fmt.Printf("  ✓ Hoàn thành thêm bài hát vào danh sách phát\n")
 
 	fmt.Printf("\n✓ Xuất lên API đã hoàn thành!\n")
 

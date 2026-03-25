@@ -315,6 +315,9 @@ func (pg *PlaylistGenerator) Generate(quantity int, tracksPerPlaylist int) error
 
 		playlistName := pg.ctx.GetRandomPlaylistName()
 
+		// Create playlist first to get its ID
+		playlistID := uuid.New().String()
+
 		// Select random tracks for this playlist
 		trackIDsForPlaylist := make([]string, 0, tracksPerPlaylist)
 		selectedTrackIndices := make(map[int]bool)
@@ -327,9 +330,9 @@ func (pg *PlaylistGenerator) Generate(quantity int, tracksPerPlaylist int) error
 				selectedTrackIndices[trackIdx] = true
 				trackIDsForPlaylist = append(trackIDsForPlaylist, tracks[trackIdx].Id)
 
-				// Add to playlist tracks junction
+				// Add to playlist tracks junction with correct playlist ID
 				playlistTracks = append(playlistTracks, model.PlaylistTrackJSON{
-					PlaylistId: uuid.New().String(), // Will be set from playlist ID
+					PlaylistId: playlistID,
 					TrackId:    tracks[trackIdx].Id,
 					Position:   j + 1,
 					AddedAt:    time.Now().UTC().Format(time.RFC3339),
@@ -338,7 +341,7 @@ func (pg *PlaylistGenerator) Generate(quantity int, tracksPerPlaylist int) error
 		}
 
 		playlist := model.PlaylistJSON{
-			Id:          uuid.New().String(),
+			Id:          playlistID,
 			OwnerId:     user.Id,
 			Name:        playlistName,
 			IsPublic:    i%2 == 0, // 50% public

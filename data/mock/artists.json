@@ -1,0 +1,42 @@
+[
+  {
+    "id": "81260aef-31d2-4a20-a614-ef04dfe9c91c",
+    "userId": "de3fe068-0c03-4e78-a12d-689491650aca",
+    "name": " Rachel Farley ",
+    "isVerified": true,
+    "createdAt": "2026-03-18T02:23:15Z",
+    "updatedAt": "2026-03-18T02:23:15Z"
+  },
+  {
+    "id": "3421012e-6270-4aee-b277-7b1ea23522eb",
+    "userId": "17efc73c-bfa2-4e84-8705-a2e45248291b",
+    "name": " Dido ",
+    "isVerified": false,
+    "createdAt": "2026-03-18T02:23:15Z",
+    "updatedAt": "2026-03-18T02:23:15Z"
+  },
+  {
+    "id": "71cbcaec-cafd-4ac7-8f53-5ab0cae10466",
+    "userId": "f1ffe46f-d1f2-44f8-a3e7-e5f301ae198b",
+    "name": " Miracle (Rap) ",
+    "isVerified": false,
+    "createdAt": "2026-03-18T02:23:15Z",
+    "updatedAt": "2026-03-18T02:23:15Z"
+  },
+  {
+    "id": "0ec0b57e-6e73-47eb-bbed-98ac0d6a35cd",
+    "userId": "95919012-b0b6-4d67-9f9e-580c0cace456",
+    "name": " Coal Chamber ",
+    "isVerified": false,
+    "createdAt": "2026-03-18T02:23:15Z",
+    "updatedAt": "2026-03-18T02:23:15Z"
+  },
+  {
+    "id": "0dc7725f-387a-4f03-a42b-6824600c891d",
+    "userId": "e4dee5d8-9bd8-44cf-af38-b206f630ebff",
+    "name": " Giannis Kotsiras ",
+    "isVerified": false,
+    "createdAt": "2026-03-18T02:23:15Z",
+    "updatedAt": "2026-03-18T02:23:15Z"
+  }
+]
