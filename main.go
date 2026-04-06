@@ -11,7 +11,6 @@ import (
 
 	"github.com/jimtrung/music-streaming-mock-data/generator/api"
 	"github.com/jimtrung/music-streaming-mock-data/generator/generators"
-	"github.com/jimtrung/music-streaming-mock-data/generator/query"
 	"github.com/jimtrung/music-streaming-mock-data/generator/repository"
 	"github.com/jimtrung/music-streaming-mock-data/model"
 )
@@ -212,12 +211,6 @@ func handleMockUser() {
 		if err := userGen.Generate(quantity); err != nil {
 			log.Printf("Lỗi sinh người dùng: %v\n", err)
 		}
-	case 2:
-		fmt.Printf("Sinh %d người dùng qua API...\n", quantity)
-		api.GenerateUser(quantity)
-	case 3:
-		fmt.Printf("Generating %d users as SQL...\n", quantity)
-		query.GenerateUser(quantity)
 	default:
 		fmt.Println("Invalid method choice.")
 	}
