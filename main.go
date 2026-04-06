@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -69,20 +68,8 @@ func main() {
 		case 6:
 			handleMockPlaylist()
 		case 7:
-			handleAddTrackToPlaylist()
-		case 8:
 			handleExportJSON()
-		case 9:
-			handleListDatasets()
-		case 10:
-			handleViewDatasetInfo()
-		case 11:
-			handleCoreExportSQL()
-		case 12:
-			handleImportJSON()
-		case 13:
-			handleGenerateFromAPI()
-		case 14:
+		case 8:
 			handleExportToAPI()
 		case 0:
 			fmt.Println("Exiting...")
@@ -111,18 +98,12 @@ func printMainMenu() {
 	fmt.Println("║  4. Sinh nghệ sĩ                                     ║")
 	fmt.Println("║  5. Sinh bài hát                                     ║")
 	fmt.Println("║  6. Sinh danh sách phát                              ║")
-	fmt.Println("║  7. Thêm bài hát vào danh sách phát                  ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║ [KHO LƯU TRỮ & XUẤT]                                 ║")
-	fmt.Println("║  8. Xuất tập dữ liệu dưới dạng JSON                  ║")
-	fmt.Println("║  9. Liệt kê tất cả các tập dữ liệu                   ║")
-	fmt.Println("║ 10. Xem thông tin tập dữ liệu                        ║")
-	fmt.Println("║ 11. Xuất truy vấn SQL                                ║")
+	fmt.Println("║  7. Xuất tập dữ liệu dưới dạng JSON                  ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║ [API & HAI CHIỀU]                                    ║")
-	fmt.Println("║ 12. Nhập tập dữ liệu JSON                            ║")
-	fmt.Println("║ 13. Sinh từ API (dữ liệu mới)                        ║")
-	fmt.Println("║ 14. Xuất dữ liệu đã tải lên API                      ║")
+	fmt.Println("║  8. Xuất dữ liệu đã tải lên API                      ║")
 	fmt.Println("║                                                      ║")
 	fmt.Println("║  0. Thoát                                            ║")
 	fmt.Println("╚══════════════════════════════════════════════════════╝")
@@ -194,25 +175,10 @@ func handleMockUser() {
 		return
 	}
 
-	fmt.Println("\n===================> Phương pháp sinh dữ liệu <====================")
-	fmt.Println("| 1. Trong bộ nhớ (đang nhanh, dùng kho lưu trữ)     |")
-	fmt.Println("| 2. Gọi hàng hóa API (backend thật)              |")
-	fmt.Println("| 3. Truy vấn SQL (nhập cơ sở dữ liệu)              |")
-	fmt.Println("=========================================================")
-
-	fmt.Print("Lựa chọn của bạn: ")
-	var method int
-	fmt.Scan(&method)
-
-	switch method {
-	case 1:
-		fmt.Printf("Sinh %d người dùng (trong bộ nhớ)...\n", quantity)
-		userGen := generators.NewUserGenerator(currentCtx)
-		if err := userGen.Generate(quantity); err != nil {
-			log.Printf("Lỗi sinh người dùng: %v\n", err)
-		}
-	default:
-		fmt.Println("Invalid method choice.")
+	fmt.Printf("Sinh %d người dùng (trong bộ nhớ)...\n", quantity)
+	userGen := generators.NewUserGenerator(currentCtx)
+	if err := userGen.Generate(quantity); err != nil {
+		log.Printf("Lỗi sinh người dùng: %v\n", err)
 	}
 	pauseForContinue()
 }
@@ -312,131 +278,6 @@ func handleMockPlaylist() {
 	pauseForContinue()
 }
 
-func handleAddTrackToPlaylist() {
-	if currentCtx == nil {
-		fmt.Println("✗ Please select a dataset first (option 1)")
-		return
-	}
-
-	if len(currentCtx.Playlists) == 0 {
-		fmt.Println("✗ No playlists found. Generate playlists first (option 6)")
-		pauseForContinue()
-		return
-	}
-
-	if len(currentCtx.Tracks) == 0 {
-		fmt.Println("✗ No tracks found. Generate tracks first (option 5)")
-		pauseForContinue()
-		return
-	}
-
-	// Display available playlists
-	fmt.Println("\n═══════════════════════════════════════════════════════")
-	fmt.Println("Available Playlists:")
-	for i, playlist := range currentCtx.Playlists {
-		fmt.Printf("[%d] %s (%d tracks)\n", i+1, playlist.Name, len(playlist.TrackIds))
-	}
-	fmt.Println("═══════════════════════════════════════════════════════")
-
-	fmt.Print("Select playlist number: ")
-	var playlistIndex int
-	fmt.Scan(&playlistIndex)
-
-	if playlistIndex < 1 || playlistIndex > len(currentCtx.Playlists) {
-		fmt.Println("Invalid playlist selection.")
-		return
-	}
-
-	playlistIdx := playlistIndex - 1
-
-	fmt.Print("Enter the number of tracks to add to this playlist: ")
-	var trackCount int
-	fmt.Scan(&trackCount)
-
-	if trackCount <= 0 {
-		fmt.Println("Invalid track count. Must be greater than 0.")
-		return
-	}
-
-	// Display available tracks
-	fmt.Println("\n═══════════════════════════════════════════════════════")
-	fmt.Println("Available Tracks:")
-	for i, track := range currentCtx.Tracks {
-		// Find artist name
-		artistName := "Unknown"
-		for _, artist := range currentCtx.Artists {
-			if artist.Id == track.ArtistId {
-				artistName = artist.Name
-				break
-			}
-		}
-		fmt.Printf("[%d] %s (%s)\n", i+1, track.Title, artistName)
-	}
-	fmt.Println("═══════════════════════════════════════════════════════")
-
-	var newPlaylistTracks []model.PlaylistTrackJSON
-	addedCount := 0
-
-	for i := 0; i < trackCount; i++ {
-		fmt.Printf("\n[Track %d/%d]\n", i+1, trackCount)
-		fmt.Print("Select track number (or 0 to skip): ")
-		var trackIndex int
-		fmt.Scan(&trackIndex)
-
-		if trackIndex == 0 {
-			continue
-		}
-
-		if trackIndex < 1 || trackIndex > len(currentCtx.Tracks) {
-			fmt.Println("Invalid track selection.")
-			continue
-		}
-
-		track := currentCtx.Tracks[trackIndex-1]
-
-		// Check if track already in playlist
-		alreadyExists := false
-		for _, tid := range currentCtx.Playlists[playlistIdx].TrackIds {
-			if tid == track.Id {
-				fmt.Printf("✗ Track already in playlist: %s\n", track.Title)
-				alreadyExists = true
-				break
-			}
-		}
-
-		if alreadyExists {
-			continue
-		}
-
-		// Add track to playlist
-		currentCtx.Playlists[playlistIdx].TrackIds = append(currentCtx.Playlists[playlistIdx].TrackIds, track.Id)
-		newPlaylistTracks = append(newPlaylistTracks, model.PlaylistTrackJSON{
-			PlaylistId: currentCtx.Playlists[playlistIdx].Id,
-			TrackId:    track.Id,
-			Position:   len(currentCtx.Playlists[playlistIdx].TrackIds),
-			AddedAt:    time.Now().UTC().Format(time.RFC3339),
-		})
-
-		fmt.Printf("✓ Added: %s\n", track.Title)
-		addedCount++
-	}
-
-	if addedCount == 0 {
-		fmt.Println("No tracks were added.")
-		pauseForContinue()
-		return
-	}
-
-	// Add all new playlist-track relationships to context
-	currentCtx.Mutex.Lock()
-	currentCtx.PlaylistTracks = append(currentCtx.PlaylistTracks, newPlaylistTracks...)
-	currentCtx.Mutex.Unlock()
-
-	fmt.Printf("\n✓ Successfully added %d tracks to playlist: %s\n", addedCount, currentCtx.Playlists[playlistIdx].Name)
-	fmt.Println("💡 Remember to export (option 8) to save changes!")
-	pauseForContinue()
-}
-
 func handleExportJSON() {
 	if currentCtx == nil {
 		fmt.Println("✗ Please select a dataset first (option 1)")
@@ -466,177 +307,6 @@ func handleExportJSON() {
 	pauseForContinue()
 }
 
-func handleListDatasets() {
-	fmt.Println("\n")
-	dataMgr.ListAllDatasets()
-	pauseForContinue()
-}
-
-func handleViewDatasetInfo() {
-	fmt.Print("Enter dataset name: ")
-	var datasetName string
-	fmt.Scan(&datasetName)
-
-	if datasetName == "" {
-		fmt.Println("Dataset name cannot be empty.")
-		return
-	}
-
-	if err := dataMgr.PrintDatasetInfo(datasetName); err != nil {
-		log.Printf("Error: %v\n", err)
-	}
-	pauseForContinue()
-}
-
-func handleCoreExportSQL() {
-	if currentCtx == nil {
-		fmt.Println("✗ Please select a dataset first (option 1)")
-		return
-	}
-
-	fmt.Print("Enter output SQL file name: ")
-	var filename string
-	fmt.Scan(&filename)
-
-	if filename == "" {
-		filename = "export.sql"
-	}
-
-	if err := dataRepo.ExportSQLQueries(currentCtx.DatasetName, filename); err != nil {
-		log.Printf("Error exporting SQL: %v\n", err)
-		return
-	}
-
-	fmt.Printf("✓ SQL exported to %s\n", filename)
-	pauseForContinue()
-}
-
-func handleImportJSON() {
-	fmt.Print("Enter the path to the JSON file to import: ")
-	var filePath string
-	fmt.Scan(&filePath)
-
-	if filePath == "" {
-		fmt.Println("✗ File path cannot be empty.")
-		pauseForContinue()
-		return
-	}
-
-	// Read the JSON file
-	fileContent, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		fmt.Printf("✗ Error reading file: %v\n", err)
-		return
-	}
-
-	// Parse JSON
-	var mockData model.MockDataJSON
-	if err := json.Unmarshal(fileContent, &mockData); err != nil {
-		fmt.Printf("✗ Error parsing JSON: %v\n", err)
-		return
-	}
-
-	// Create or select dataset
-	datasetName := mockData.Metadata.DatasetName
-	if datasetName == "" {
-		fmt.Print("Enter dataset name for imported data: ")
-		fmt.Scan(&datasetName)
-	}
-
-	if datasetName == "" {
-		fmt.Println("✗ Dataset name cannot be empty.")
-		return
-	}
-
-	// Check if dataset exists
-	_, exists := dataRepo.GetDatasetMetadata(datasetName)
-	if !exists {
-		if err := dataMgr.CreateNewDataset(datasetName, "Imported from JSON"); err != nil {
-			log.Printf("✗ Error creating dataset: %v\n", err)
-			return
-		}
-	}
-
-	// Initialize generator context
-	currentCtx, err = generators.NewGeneratorContext(dataRepo, datasetName)
-	if err != nil {
-		log.Printf("✗ Error initializing generator context: %v\n", err)
-		return
-	}
-
-	// Load data into context
-	currentCtx.Mutex.Lock()
-	currentCtx.Users = mockData.Users
-	currentCtx.Profiles = mockData.Profiles
-	currentCtx.Artists = mockData.Artists
-	currentCtx.Tracks = mockData.Tracks
-	currentCtx.Playlists = mockData.Playlists
-	currentCtx.PlaylistTracks = mockData.PlaylistTracks
-	currentCtx.Mutex.Unlock()
-
-	// Save to repository
-	if err := dataRepo.SaveAllData(datasetName, &mockData); err != nil {
-		log.Printf("✗ Error saving dataset: %v\n", err)
-		return
-	}
-
-	stats := currentCtx.GetStats()
-	fmt.Printf("\n✓ JSON imported successfully!\n")
-	fmt.Printf("  Dataset: %s\n", datasetName)
-	fmt.Printf("  Users: %d | Artists: %d | Tracks: %d | Playlists: %d\n",
-		stats["users"], stats["artists"], stats["tracks"], stats["playlists"])
-	pauseForContinue()
-}
-
-func handleGenerateFromAPI() {
-	fmt.Print("Enter dataset name for API generation: ")
-	var datasetName string
-	fmt.Scan(&datasetName)
-
-	if datasetName == "" {
-		fmt.Println("✗ Dataset name cannot be empty.")
-		return
-	}
-
-	// Check if dataset exists
-	_, exists := dataRepo.GetDatasetMetadata(datasetName)
-	if !exists {
-		if err := dataMgr.CreateNewDataset(datasetName, "Generated from API"); err != nil {
-			log.Printf("✗ Error creating dataset: %v\n", err)
-			return
-		}
-	}
-
-	// Initialize generator context
-	var err error
-	currentCtx, err = generators.NewGeneratorContext(dataRepo, datasetName)
-	if err != nil {
-		log.Printf("✗ Error initializing generator context: %v\n", err)
-		return
-	}
-
-	fmt.Print("Enter the number of users to generate via API: ")
-	var userCount int
-	fmt.Scan(&userCount)
-
-	if userCount <= 0 {
-		fmt.Println("✗ User count must be greater than 0.")
-		return
-	}
-
-	fmt.Printf("\n[GENERATING FROM API - %d USERS]\n", userCount)
-	fmt.Println("Note: API generation may take longer due to backend processing.")
-
-	// Call API to generate
-	api.GenerateUser(userCount)
-
-	fmt.Printf("\n✓ API generation completed!\n")
-	fmt.Printf("  Dataset: %s\n", datasetName)
-	fmt.Println("  (API-generated data has been sent to the backend)")
-	fmt.Println("  Tip: Use 'Export to API' (option 13) to push loaded data to endpoints.")
-	pauseForContinue()
-}
-
 func handleExportToAPI() {
 	if currentCtx == nil {
 		fmt.Println("✗ Vui lòng tải tập dữ liệu trước (nhập JSON với lựa chọn 11 hoặc sinh với lựa chọn 12)")
@@ -655,7 +325,7 @@ func handleExportToAPI() {
 	fmt.Printf("  Người dùng: %d | Nghệ sĩ: %d | Bài hát: %d | Danh sách: %d\n",
 		stats["users"], stats["artists"], stats["tracks"], stats["playlists"])
 
-	fmt.Print("\nXuất dữ liệu lên API? (có/không): ")
+	fmt.Print("\nXuất dữ liệu lên API? (y/n): ")
 	var confirm string
 	fmt.Scan(&confirm)
 
@@ -860,7 +530,7 @@ func handleExportToAPI() {
 	fmt.Printf("\n✓ Xuất lên API đã hoàn thành!\n")
 
 	// Save compiled data as JSON for reference
-	fmt.Print("Lưu xuất dữ liệu dưới dạng tầp tin JSON? (có/không): ")
+	fmt.Print("Lưu xuất dữ liệu dưới dạng tầp tin JSON? (y/n): ")
 	fmt.Scan(&confirm)
 
 	if confirm == "y" || confirm == "Y" {
